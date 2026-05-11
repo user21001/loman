@@ -171,8 +171,9 @@ body.offline .offline-bar { display: flex; }
   .kanban { 
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     overflow-x: visible;
-    gap: 8px;
+    gap: 12px;
     padding-bottom: 0;
   }
   .kanban::-webkit-scrollbar { display: none; }
