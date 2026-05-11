@@ -68,8 +68,6 @@ const sidebarStatsEl    = document.querySelector(".sidebar-stats");
 const kanbanEl          = $("kanban");
 const ordersListEl      = $("ordersList");
 const inventoryListEl   = $("inventoryList");
-const installButton     = $("installButton");
-const iosHint           = $("iosHint");
 const roleBadge         = $("roleBadge");
 const currentUserNameEl = $("currentUserName");
 const heroText          = $("heroText");
@@ -207,20 +205,6 @@ function bindEvents() {
       window.scrollTo({ top: 0, behavior: "instant" });
     });
   });
-
-  installButton.addEventListener("click", async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    installButton.classList.add("hidden");
-  });
-
-  window.addEventListener("beforeinstallprompt", e => {
-    e.preventDefault(); deferredPrompt = e;
-    installButton.classList.remove("hidden");
-  });
-  window.addEventListener("appinstalled", () => installButton.classList.add("hidden"));
 
   // User menu dropdown
   const userMenuBtn  = $("userMenuBtn");
@@ -749,51 +733,7 @@ function renderZoneFilter() {
 // ── Urgent section ────────────────────────────────────────────────
 function renderUrgentSection() {
   const el = $("urgentSection");
-  if (!el) return;
-
-  let overdue = getDelayedOrders().filter(o => !o.expeditionDone);
-  if (ui.dashboardFilter === "mine") {
-    const cur = getCurrentUser();
-    if (cur) overdue = overdue.filter(o => o.assigneeId === cur.id);
-  }
-  if (ui.kanbanZone) overdue = overdue.filter(o => o.location?.toUpperCase().startsWith(ui.kanbanZone));
-  if (!overdue.length) { el.innerHTML = ""; return; }
-
-  const isWorker = !isAdmin(getCurrentUser());
-
-  const rows = overdue.map(o => {
-    const action   = getPrimaryAction(o);
-    const msLate   = Date.now() - new Date(o.shipDate).getTime();
-    const daysLate = Math.ceil(msLate / 86_400_000);
-    const isPendingShip = action?.type === "ship" && ui.pendingShipId === o.id;
-    let actionBtn = "";
-    if (isWorker && action) {
-      const lbl = isPendingShip ? "Potvrdiť?" : action.label;
-      const cls = `or-action-btn${action.type === "ship" ? " or-action-ship" : ""}${isPendingShip ? " or-action-confirm" : ""}`;
-      actionBtn = `<button class="${cls}" data-action="${action.type}" data-order-id="${o.id}" data-inline="1" type="button">${lbl}</button>`;
-    } else if (action) {
-      actionBtn = `<button class="${action.cls}" data-action="${action.type}" data-order-id="${o.id}" type="button" style="font-size:.7rem;padding:3px 6px;border-radius:0;border:1px solid var(--blue-m);background:transparent;color:var(--blue-d);">${action.label}</button>`;
-    }
-    return `
-      <article class="urgent-row" data-order-id="${o.id}">
-        <div style="flex:1;min-width:0;">
-          <span class="or-name">${escapeHtml(o.customer)}</span>
-          <span class="or-sub">${escapeHtml(o.item)} · ${escapeHtml(o.location)}</span>
-        </div>
-        <span class="urgent-days">+${daysLate}d</span>
-        ${actionBtn}
-      </article>`;
-  }).join("");
-
-  el.innerHTML = `
-    <div class="urgent-section">
-      <div class="urgent-label">
-        <span class="urgent-dot"></span>
-        Meškajú
-        <span class="urgent-count">${overdue.length}</span>
-      </div>
-      <div class="urgent-rows">${rows}</div>
-    </div>`;
+  if (el) el.innerHTML = "";
 }
 
 // ── Kanban ────────────────────────────────────────────────────────
@@ -1868,8 +1808,5 @@ function registerServiceWorker() {
 }
 
 function handlePlatformHints() {
-  const ua = navigator.userAgent.toLowerCase();
-  const isIos = /iphone|ipad|ipod/.test(ua);
-  const isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-  if (isIos && !isStandalone) iosHint.classList.remove("hidden");
+  // Install hints were removed from the UI; keep the hook harmless.
 }

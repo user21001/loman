@@ -49,10 +49,10 @@
 }
 
 .ship-btn {
-  flex: 1; min-height: 34px; padding: 6px 12px; border-radius: var(--r-sm);
-  border: none; background: var(--blue); color: #fff;
-  font-weight: 700; font-size: .8rem;
-  box-shadow: 0 2px 8px rgba(59,130,246,.3); transition: all .15s; cursor: pointer;
+  flex: 1; min-height: 28px; padding: 4px 8px; border-radius: 0;
+  border: 1px solid var(--blue-m); background: transparent; color: var(--blue-d);
+  font-weight: 700; font-size: .75rem;
+  box-shadow: none; cursor: pointer;
 }
 
 .btn-danger {
