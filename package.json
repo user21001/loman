@@ -1,0 +1,14 @@
+{
+  "name": "loman-sklad-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mobilne optimalizovane MVP skladu pre Loman",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

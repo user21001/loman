@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+data/backups/
+data/cert.pem
+data/key.pem
+fix_*.py
+remove_hover.py
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

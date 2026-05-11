@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ─── Tokens ─────────────────────────────────────────────────────── */
+:root {
+  --bg:      #F8FAFC;
+  --surface: #FFFFFF;
+  --sur2:    #F1F5F9;
+  --ink:     #0F172A;
+  --ink2:    #334155;
+  --muted:   #64748B;
+  --line:    #E2E8F0;
+
+  --blue:    #3B82F6;
+  --blue-d:  #2563EB;
+  --blue-s:  #EFF6FF;
+  --blue-m:  #BFDBFE;
+
+  --green:   #10B981;
+  --green-s: #F0FDF4;
+  --green-m: #A7F3D0;
+
+  --amber:   #F59E0B;
+  --amber-s: #FFFBEB;
+  --amber-m: #FDE68A;
+
+  --red:     #EF4444;
+  --red-s:   #FEF2F2;
+  --red-m:   #FECACA;
+
+  --slate:   #64748B;
+  --slate-s: #F8FAFC;
+  --slate-m: #CBD5E1;
+
+  --accent:  #06B6D4;
+
+  --r:    12px;
+  --r-sm: 8px;
+  --r-lg: 16px;
+  --sh:   0 4px 16px rgba(0,0,0,.08);
+  --sh-s: 0 1px 4px rgba(0,0,0,.06);
+  --font: 'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --top-h: 56px;
+  --nav-h: 64px;
+  --side-w: 240px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
+body { padding: 0 0 env(safe-area-inset-bottom); }
+button, input, select { font: inherit; cursor: pointer; }
+h1, h2, h3, p { margin: 0; }
+.muted { color: var(--muted); }
+.hidden { display: none !important; }

@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: loman-sklad-mvp
+    runtime: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: loman-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
